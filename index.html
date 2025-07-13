@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sefa Kırtasiye</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background"></div>
+
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.png" alt="Sefa Kırtasiye Logo" class="logo" />
+      <h1>Sefa Kırtasiye</h1>
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="#">Anasayfa</a></li>
+        <li><a href="#hakkimizda">Hakkımızda</a></li>
+        <li><a href="#urunler">Ürünler</a></li>
+        <li><a href="#iletisim">İletişim</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="slider">
+    <div class="slide active" style="background-image: url('images/banner1.jpg');">
+      <div class="slide-text"><h2></h2><p></p></div>
+    </div>
+    <div class="slide" style="background-image: url('images/banner2.jpg');">
+      <div class="slide-text"><h2></h2><p></p></div>
+    </div>
+    <div class="slide" style="background-image: url('images/banner3.jpg');">
+      <div class="slide-text"><h2></h2><p></p></div>
+    </div>
+    <button class="slider-btn prev">&#10094;</button>
+    <button class="slider-btn next">&#10095;</button>
+    <div class="slider-dots">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
+    </div>
+  </section>
+
+  <section id="hakkimizda">
+    <h2>Hakkımızda</h2>
+    <p>Hatay Hassa Akbez'de faaliyet gösteren Sefa Kırtasiye; kırtasiye, oyuncak, hediyelik eşya ve takı alanlarında hizmet sunar.</p>
+  </section>
+
+  <section id="urunler">
+    <h2>Ürünlerimiz</h2>
+    <div class="urunler">
+      <div class="urun">
+        <img src="images/kalem.jpg" alt="Kalem" />
+        <h3>Kırtasiye malzemeleri</h3>
+        <p>Kaliteli ve güvenli kırtasiye malzemeleri.</p>
+      </div>
+      <div class="urun">
+        <img src="images/defter.jpg" alt="Defter" />
+        <h3>Hediyelik eşyalar</h3>
+        <p>Çeşitli hediyelik eşyalar.</p>
+      </div>
+      <div class="urun">
+        <img src="images/oyuncak.jpg" alt="Oyuncak" />
+        <h3>Oyuncaklar</h3>
+        <p>Çocuklar için eğlenceli ve öğretici oyuncaklar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="iletisim">
+    <h2>İletişim</h2>
+    <p>📍 Adres: Akbez Merkez Camii Karşısı Hassa/Hatay</p>
+    <p>📞 Telefon: 0 (535) 548 93 05</p>
+    <p>📸 Instagram: <a href="https://instagram.com/akbezsefakirtasiye" target="_blank">@akbezsefakirtasiye</a></p>
+    
+    <h2>İletişim Formu</h2>
+    <form class="iletisim-form">
+      <input type="text" placeholder="Adınız Soyadınız" required />
+      <input type="email" placeholder="E-posta Adresiniz" required />
+      <textarea placeholder="Mesajınız" rows="4" required></textarea>
+      <button type="submit">Gönder</button>
+    </form>
+<h2>Yerimiz</h2>
+    <div class="harita-kapsayici">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2257.507088118196!2d36.55396905455781!3d36.85212321431086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x152f09da90a7eb3f%3A0x4a1bb89a48d7d187!2sakbez%20sefa%20k%C4%B1rtasiye!5e0!3m2!1str!2str!4v1751961920035!5m2!1str!2str"
+        width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2022 Sefa Kırtasiye | Tüm Hakları Saklıdır</p>
+  </footer>
+
+  <script>
+    // Menü Toggle
+    const menuToggle = document.getElementById('mobile-menu');
+    const navList = document.querySelector('.nav-list');
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navList.classList.toggle('active');
+    });
+
+    // Slider
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.querySelector('.slider-btn.prev');
+    const nextBtn = document.querySelector('.slider-btn.next');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+    let slideInterval;
+
+    function showSlide(i) {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === i);
+        dots[idx].classList.toggle('active', idx === i);
+      });
+      currentIndex = i;
+    }
+
+    function nextSlide() {
+      showSlide((currentIndex + 1) % slides.length);
+    }
+
+    function prevSlide() {
+      showSlide((currentIndex - 1 + slides.length) % slides.length);
+    }
+
+    function startAutoSlide() {
+      slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(slideInterval);
+    }
+
+    nextBtn?.addEventListener('click', () => {
+      nextSlide();
+      stopAutoSlide();
+      startAutoSlide();
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      prevSlide();
+      stopAutoSlide();
+      startAutoSlide();
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        let index = parseInt(dot.dataset.index);
+        showSlide(index);
+        stopAutoSlide();
+        startAutoSlide();
+      });
+    });
+
+    showSlide(currentIndex);
+    startAutoSlide();
+
+    document.querySelector('.iletisim-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert("Mesajınız başarıyla gönderildi. Teşekkür ederiz!");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
